@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import { RecipeMarketHubBase, RewardStyle, WeirollWallet } from "src/base/RecipeMarketHubBase.sol";
 import { ERC20 } from "lib/solmate/src/tokens/ERC20.sol";
-import { ERC4626 } from "lib/solmate/src/tokens/ERC4626.sol";
+import { ERC4626 } from "lib/solady/src/tokens/ERC4626.sol";
 import { ClonesWithImmutableArgs } from "lib/clones-with-immutable-args/src/ClonesWithImmutableArgs.sol";
 import { SafeTransferLib } from "lib/solmate/src/utils/SafeTransferLib.sol";
 import { FixedPointMathLib } from "lib/solmate/src/utils/FixedPointMathLib.sol";
@@ -133,7 +133,7 @@ contract RecipeMarketHub is RecipeMarketHubBase {
         }
 
         // NOTE: The cool use of short-circuit means this call can't revert if fundingVault doesn't support asset()
-        if (fundingVault != address(0) && targetMarket.inputToken != ERC4626(fundingVault).asset()) {
+        if (fundingVault != address(0) && address(targetMarket.inputToken) != ERC4626(fundingVault).asset()) {
             revert MismatchedBaseAsset();
         }
 
@@ -333,7 +333,7 @@ contract RecipeMarketHub is RecipeMarketHubBase {
             fillAmount = offer.remainingQuantity;
         }
         // Check that the offer's base asset matches the market's base asset
-        if (fundingVault != address(0) && market.inputToken != ERC4626(fundingVault).asset()) {
+        if (fundingVault != address(0) && address(market.inputToken) != ERC4626(fundingVault).asset()) {
             revert MismatchedBaseAsset();
         }
         // Check that the offer isn't empty

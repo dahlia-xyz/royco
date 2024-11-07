@@ -5,7 +5,7 @@ import { MockERC20 } from "test/mocks/MockERC20.sol";
 import { MockERC4626 } from "test/mocks/MockERC4626.sol";
 
 import { ERC20 } from "lib/solmate/src/tokens/ERC20.sol";
-import { ERC4626 } from "lib/solmate/src/tokens/ERC4626.sol";
+import { ERC4626 } from "lib/solady/src/tokens/ERC4626.sol";
 
 import { WrappedVault } from "src/WrappedVault.sol";
 import { WrappedVaultFactory } from "src/WrappedVaultFactory.sol";

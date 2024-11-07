@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import { Owned } from "lib/solmate/src/auth/Owned.sol";
-import { ERC4626 } from "lib/solmate/src/tokens/ERC4626.sol";
+import { ERC4626 } from "lib/solady/src/tokens/ERC4626.sol";
 import { LibString } from "lib/solmate/src/utils/LibString.sol";
 import { WrappedVault } from "src/WrappedVault.sol";
 

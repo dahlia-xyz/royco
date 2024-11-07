@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "src/Points.sol";
 import { WrappedVault } from "../../../src/WrappedVault.sol";
-import { ERC4626 } from "../../../lib/solmate/src/tokens/ERC4626.sol";
+import { ERC4626 } from "../../../lib/solady/src/tokens/ERC4626.sol";
 import { RoycoTestBase } from "../../utils/RoycoTestBase.sol";
 
 contract Test_Points is RoycoTestBase {
