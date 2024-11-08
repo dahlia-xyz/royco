@@ -10,6 +10,7 @@ import { PointsFactory } from "src/PointsFactory.sol";
 import { FixedPointMathLib } from "lib/solmate/src/utils/FixedPointMathLib.sol";
 import { IWrappedVault } from "src/interfaces/IWrappedVault.sol";
 import { WrappedVaultFactory } from "src/WrappedVaultFactory.sol";
+import {console} from "forge-std/Test.sol";
 
 /// @title WrappedVault
 /// @author Jack Corddry, CopyPaste, Shivaansh Kapoor
@@ -289,6 +290,7 @@ contract WrappedVault is Owned, ERC20, IWrappedVault {
 
         // Calculate the rate
         uint256 rewardsAfterFee = totalRewards - frontendFeeTaken - protocolFeeTaken;
+        console.log("rewardsAfterFee", rewardsAfterFee);
         uint256 rate = rewardsAfterFee / (end - start);
 
         if (rate == 0) revert NoZeroRateAllowed();
@@ -353,7 +355,7 @@ contract WrappedVault is Owned, ERC20, IWrappedVault {
         // Calculate and update the new value of the accumulator.
         rewardsPerTokenOut.accumulated = (rewardsPerTokenIn.accumulated + (elapsedWAD.mulDivDown(rewardsInterval_.rate, totalSupply))); // The
             // rewards per token are scaled up for precision
-
+        console.log("rewardsPerTokenOut.accumulated", rewardsPerTokenOut.accumulated);
         return rewardsPerTokenOut;
     }
 
