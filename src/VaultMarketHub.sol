@@ -37,10 +37,10 @@ contract VaultMarketHub is Ownable2Step, ReentrancyGuardTransient {
 
     /// @notice The minimum time a campaign must run for before someone can be allocated into it
     uint256 public constant MIN_CAMPAIGN_DURATION = 1 weeks;
-    
+
     /// @notice whether offer fills are paused
     bool public offersPaused;
-    
+
     /// @dev The minimum quantity of tokens for an offer
     uint256 internal constant MINIMUM_QUANTITY = 1e6;
 
@@ -211,7 +211,7 @@ contract VaultMarketHub is Ownable2Step, ReentrancyGuardTransient {
         } else {
             // Get pre-withdraw token balance of VaultMarketHub
             uint256 preWithdrawTokenBalance = targetAsset.balanceOf(address(this));
-            
+
             // Withdraw from the funding vault to the VaultMarketHub
             ERC4626(offer.fundingVault).withdraw(fillAmount, address(this), offer.ap);
 
@@ -225,7 +225,7 @@ contract VaultMarketHub is Ownable2Step, ReentrancyGuardTransient {
         }
 
         for (uint256 i; i < offer.incentivesRatesRequested.length; ++i) {
-            (, uint32 end, ) = WrappedVault(offer.targetVault).rewardToInterval(offer.incentivesRequested[i]);
+            (, uint32 end,) = WrappedVault(offer.targetVault).rewardToInterval(offer.incentivesRequested[i]);
             if (end < MIN_CAMPAIGN_DURATION + block.timestamp) {
                 revert OfferConditionsNotMet();
             }

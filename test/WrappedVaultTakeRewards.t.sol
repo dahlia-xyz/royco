@@ -19,10 +19,12 @@ import { Test, console } from "forge-std/Test.sol";
 
 library TestLib {
 uint8 public constant vaultERC20decimals = uint8(18);
+uint8 public constant vaultVirtualOffset = uint8(6);
+uint8 public constant rewardERC20decimals = uint8(6);
 }
 
 contract RewardMockERC20 is ERC20 {
-    constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol, 6) { }
+    constructor(string memory _name, string memory _symbol) ERC20(_name, _symbol, TestLib.rewardERC20decimals) { }
 
     function mint(address to, uint256 amount) public {
         _mint(to, amount);
@@ -60,7 +62,7 @@ contract VaultERC4626 is ERC4626 {
     }
 
     function _decimalsOffset() internal view virtual override returns (uint8) {
-        return 6;
+        return TestLib.vaultVirtualOffset;
     }
 
     function _useVirtualShares() internal view virtual override returns (bool) {
@@ -109,8 +111,8 @@ contract WrappedVaultTakeRewardsTest is Test {
 
     function testTakeRewards() public {
         // !!!!!! change this params for checking rewards
-        uint256 rewardAmount = 1000e6; // 1000 USDC rewards
-        uint256 depositAmount = 500e18; // 500 ETH
+        uint256 rewardAmount = 100000000000 * 10 ** TestLib.rewardERC20decimals; // 1000 USDC rewards
+        uint256 depositAmount = 50 * 10 ** TestLib.vaultERC20decimals; // 500 ETH
 
         uint32 start = uint32(block.timestamp);
         uint32 duration = 30 days;
