@@ -495,7 +495,9 @@ contract WrappedVault is Ownable, InitializableERC20, IWrappedVault {
         if (rewardsInterval.start > block.timestamp || block.timestamp >= rewardsInterval.end) return 0;
         uint256 shares = VAULT.previewDeposit(assets);
 
-        return (uint256(rewardsInterval.rate) * shares / (totalSupply + shares)) * 1e18 / assets;
+        // The fix
+        //return (uint256(rewardsInterval.rate) * shares * 1e18 / (totalSupply + shares))  / assets;
+        return (uint256(rewardsInterval.rate) * shares / (totalSupply + shares))  * 1e18 / assets;
     }
 
     /*//////////////////////////////////////////////////////////////
