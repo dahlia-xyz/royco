@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import { PointsFactory } from "./PointsFactory.sol";
-import { Ownable2Step, Ownable } from "../lib/openzeppelin-contracts/contracts/access/Ownable2Step.sol";
+import { Ownable2Step, Ownable } from "lib/openzeppelin-contracts/contracts/access/Ownable2Step.sol";
 
 /// @title Points
 /// @author CopyPaste, Jack Corddry, Shivaansh Kapoor
